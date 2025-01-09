@@ -8,8 +8,8 @@ def lambda_handler(event, context):
     table = dynamodb.Table('webpage-visitor-counter')
     response = table.update_item(
       Key={'counter-id': '1'},
-      UpdateExpression='SET counterVal = :s',
-      ExpressionAttributeValues={':s': 1},
+      UpdateExpression='SET counterVal = counterVal + :incr',
+      ExpressionAttributeValues={':incr': 1},
       ReturnValues="UPDATED_NEW"
     )
     print(response['Attributes'])
